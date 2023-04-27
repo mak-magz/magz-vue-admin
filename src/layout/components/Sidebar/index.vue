@@ -1,37 +1,33 @@
 <script lang="ts" setup>
-import router from '@/router';
+
 import { ref } from 'vue'
+import { useRouter } from 'vue-router';
+import SidebarItem from './SidebarItem.vue';
+
+const router = useRouter();
+
+const routes = [...router.options.routes];
 
 const activeIndex = ref('1')
-// const activeIndex2 = ref('1')
 const handleSelect = (key: string) => {
-  console.log(key)
-  key === "1" ? nav("/dashboard") : key === "2" ? nav("add") : nav("/logout")
+    console.log(key)
+    nav(key)
 }
 
 function nav(route: string) {
-    router.replace(route)
+    router.push(route)
 }
+
 </script>
 
 <template>
     <el-scrollbar>
-       <el-menu mode="vertical" :default-active="activeIndex" @select="handleSelect">
-            <el-menu-item index="1" >DASHBOARD</el-menu-item>
-            <el-menu-item index="2" >ADD</el-menu-item>
-            <el-menu-item index="3" >LOGIN</el-menu-item>
-
-       </el-menu>
+        <el-menu mode="vertical" :default-active="activeIndex" @select="handleSelect">
+            <SidebarItem v-for="route in routes" :route="route" />
+        </el-menu>
     </el-scrollbar>
-    <!-- <div>sidebar</div> -->
 </template>
 
-<style scoped>
-    .el-menu {
-        height: max-content;
-    }
+<style lang="scss" scoped>
 
-    .el-menu {
-
-    }
 </style>
