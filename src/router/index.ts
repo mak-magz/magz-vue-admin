@@ -28,7 +28,8 @@ export const routes: RouteRecordRaw[] = [
         component: () => import('@/views/dashboard/dashboard-index.vue'),
         name: 'dashboard',
         meta: {
-          title: 'Dashboard'
+          title: 'Dashboard',
+          activeMenu: '/dashboard'
         }
       }
     ]
@@ -46,7 +47,8 @@ export const routes: RouteRecordRaw[] = [
         component: () => import('@/views/add/add-index.vue'),
         name: 'add',
         meta: {
-          title: 'Add'
+          title: 'Add',
+          activeMenu: '/add'
         }
       }
     ]
