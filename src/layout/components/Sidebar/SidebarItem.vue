@@ -17,7 +17,7 @@ const props = defineProps({
 // Count the number of visible child routes
 const visibleChildCount = computed(() => {
   if (!props.route.children) return 0
-  const count = props.route.children.filter(child => !(child.meta && child.meta.hidden))
+  const count = props.route.children.filter((child) => !(child.meta && child.meta.hidden))
   return count.length
 })
 
@@ -29,7 +29,7 @@ const onlyChild = computed(() => {
   }
 
   if (hasOnlyOneVisibleChild.value) {
-    const route = props.route.children?.find(child => !child.meta?.hidden)
+    const route = props.route.children?.find((child) => !child.meta?.hidden)
     return route
   }
 
@@ -50,9 +50,7 @@ const resolvePath = (routePath: string) => {
     </template>
     <!-- TODO: Display routes with children -->
     <template v-else>
-      <el-menu-item :index="path.resolve(route.path)">
-        has children
-      </el-menu-item>
+      <el-menu-item :index="path.resolve(route.path)"> has children </el-menu-item>
     </template>
   </div>
 </template>
