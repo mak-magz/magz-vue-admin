@@ -25,7 +25,10 @@ function nav(route: string) {
 <template>
   <el-scrollbar>
     <el-menu mode="vertical" :default-active="activeMenu" @select="handleSelect">
-      <SidebarItem v-for="route in routes" :route="route" :key="route.path" />
+      <SidebarItem v-for="route in routes" :route="route" :key="route.path" :base-path="route.path" />
+      <el-menu-item :index="'/logout'">
+        Logout
+      </el-menu-item>
     </el-menu>
   </el-scrollbar>
 </template>

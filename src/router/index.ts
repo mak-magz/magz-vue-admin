@@ -57,7 +57,8 @@ export const routes: RouteRecordRaw[] = [
     path: '/logout',
     redirect: '/login',
     meta: {
-      title: 'Logout'
+      title: 'Logout',
+      hidden: true
     }
   }
 ]
