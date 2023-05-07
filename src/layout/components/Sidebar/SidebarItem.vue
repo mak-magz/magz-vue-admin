@@ -21,15 +21,13 @@ const visibleChildCount = computed(() => {
   return count.length
 })
 
-const hasOnlyOneVisibleChild = computed(() => visibleChildCount.value === 1)
-
 const onlyChild = computed(() => {
   if (visibleChildCount.value > 1) {
     return null
   }
 
-  if (hasOnlyOneVisibleChild.value) {
-    const route = props.route.children?.find((child) => !child.meta?.hidden)
+  if (props.route.children) {
+    const route = props.route.children.find((child) => !child.meta?.hidden)
     return route
   }
 
@@ -42,15 +40,36 @@ const resolvePath = (routePath: string) => {
 </script>
 
 <template>
-  <div v-if="!props.route.meta?.hidden">
-    <template v-if="hasOnlyOneVisibleChild && onlyChild">
+  <div v-if="!props.route.meta?.hidden" :class="{ 'first-level': visibleChildCount === 0 }">
+    <template v-if="onlyChild && !onlyChild.children">
       <el-menu-item :index="resolvePath(onlyChild.path)">
         {{ onlyChild.meta?.title ?? path.resolve(onlyChild.path) }}
       </el-menu-item>
     </template>
-    <!-- TODO: Display routes with children -->
-    <template v-else>
-      <el-menu-item :index="path.resolve(route.path)"> has children </el-menu-item>
-    </template>
+    <el-sub-menu v-else :index="resolvePath(props.route.path)" teleported>
+      <template #title> {{ props.route.meta?.title }}</template>
+      <template v-if="!!props.route.children">
+        <SidebarItem
+          v-for="childRoute in props.route.children"
+          :route="childRoute"
+          :key="childRoute.path"
+          :base-path="resolvePath(childRoute.path)"
+        />
+      </template>
+    </el-sub-menu>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.first-level {
+  :deep(.el-sub-menu) {
+    .el-sub-menu__icon-arrow {
+      display: none;
+    }
+
+    span {
+      visibility: hidden;
+    }
+  }
+}
+</style>

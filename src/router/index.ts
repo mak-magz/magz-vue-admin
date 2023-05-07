@@ -14,11 +14,6 @@ export const routes: RouteRecordRaw[] = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    /**
-     * * Temporary title for routes with children
-     * TODO: check for nested routes
-     * *See SidebarItem.vue
-     */
     meta: {
       title: 'Dashboard'
     },
@@ -37,7 +32,7 @@ export const routes: RouteRecordRaw[] = [
   {
     path: '/add',
     component: Layout,
-    // * Temp: See comment above
+    redirect: '/add/index',
     meta: {
       title: 'Add'
     },
@@ -49,6 +44,15 @@ export const routes: RouteRecordRaw[] = [
         meta: {
           title: 'Add',
           activeMenu: '/add'
+        }
+      },
+      {
+        path: '/edit',
+        component: () => import('@/views/edit/edit-index.vue'),
+        name: 'edit',
+        meta: {
+          title: 'Edit',
+          activeMenu: '/edit'
         }
       }
     ]
