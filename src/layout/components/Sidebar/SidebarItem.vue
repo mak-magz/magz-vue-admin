@@ -44,6 +44,7 @@ const resolvePath = (routePath: string) => {
     <template v-if="onlyChild && !onlyChild.children">
       <el-menu-item :index="resolvePath(onlyChild.path)">
         {{ onlyChild.meta?.title ?? path.resolve(onlyChild.path) }}
+
       </el-menu-item>
     </template>
     <el-sub-menu v-else :index="resolvePath(props.route.path)" teleported>

@@ -1,7 +1,12 @@
 <script setup lang="ts"></script>
 
 <template>
-  <router-view />
+  <el-row :gutter="20" justify="center">
+    <el-col :xs="24" :sm="24" :md="24" :lg="18" :xl="16" >
+      <router-view />
+    </el-col>
+  </el-row>
+  
 </template>
 
 <style scoped>
