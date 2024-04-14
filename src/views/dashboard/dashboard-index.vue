@@ -52,6 +52,6 @@ async function createPdf() {
 
 <template>
   <div class="dashboard-container">Dashboard</div>
-  <el-button type="primary" size="default" @click="createPdf">PDF</el-button>
+  <!-- <el-button type="primary" size="default" @click="createPdf">PDF</el-button> -->
   
 </template>

@@ -29,13 +29,15 @@ const handleSelect = (key: string) => {
 function nav(route: string) {
   router.push(route)
 }
+
+const mobile = false
 </script>
 
 <template>
   <el-scrollbar>
     <el-menu mode="vertical" :default-active="activeMenu" @select="handleSelect" :collapse="props.collapse" class="side">
-      <el-menu-item id="side-logo" :class="{ 'collapse': props.collapse }">
-        <template v-if="props.collapse">
+      <el-menu-item id="side-logo" :class="{ 'collapse': props.collapse }" class="mobile">
+        <template v-if="props.collapse && !mobile">
           <img :src="fbIcon" class="icon-logo">
         </template>
         <template v-else>
@@ -61,11 +63,19 @@ function nav(route: string) {
 
 .side:not(.el-menu--collapse) {
   width: 220px;
+  .icon-logo {
+    display: none !important;
+  }
 }
 
 .side:is(.el-menu--collapse) {
-  width: 0px;
-  margin-left: -1px;
+  &.mobile {
+    .icon-logo {
+      display: none !important;
+    }
+  }
+  // width: 0px;
+  // margin-left: -1px;
 }
 
 .icon-logo {
